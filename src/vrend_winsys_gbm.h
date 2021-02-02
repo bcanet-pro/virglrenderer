@@ -25,7 +25,9 @@
 #ifndef VIRGL_GBM_H
 #define VIRGL_GBM_H
 
+#ifdef HAVE_EPOXY_EGL_H
 #include <gbm.h>
+#endif
 #include "vrend_iov.h"
 #include "virglrenderer.h"
 
@@ -66,6 +68,8 @@ struct virgl_gbm {
    struct gbm_device *device;
 };
 
+#ifdef HAVE_EPOXY_EGL_H
+
 struct virgl_gbm *virgl_gbm_init(int fd);
 
 void virgl_gbm_fini(struct virgl_gbm *gbm);
@@ -87,5 +91,7 @@ int virgl_gbm_get_plane_bytes_per_pixel(struct gbm_bo *bo, int plane);
 
 bool virgl_gbm_external_allocation_preferred(uint32_t flags);
 bool virgl_gbm_gpu_import_required(uint32_t flags);
+
+#endif
 
 #endif
